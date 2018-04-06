@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/dglib/user")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
