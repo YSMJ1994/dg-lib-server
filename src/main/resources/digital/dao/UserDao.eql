@@ -1,0 +1,3 @@
+-- [queryUser]
+SELECT id, username, account, role
+from user where account = #1# and password = #2#
