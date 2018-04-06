@@ -1,16 +1,22 @@
 package digital.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import digital.dto.Result;
+import digital.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String hello(@PathVariable(value = "id") int id) {
-        return "hello" + id;
+    @Autowired
+    private UserService userService;
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result hello(@RequestBody Map<String, String> map) {
+
+        return userService.loginByAccountAndPwd(map.get("account"), map.get("password"));
     }
 }
