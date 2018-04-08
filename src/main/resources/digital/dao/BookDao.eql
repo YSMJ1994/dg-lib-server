@@ -1,0 +1,6 @@
+-- [getAllBookType]
+SELECT * from book_type
+-- [getBookByType]
+SELECT * from book where type = #1#
+-- [getBookByTypeLimit3]
+SELECT * from book where type = #1# order by average_score desc limit 4

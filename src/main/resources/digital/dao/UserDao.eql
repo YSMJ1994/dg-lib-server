@@ -1,3 +1,10 @@
 -- [queryUser]
 SELECT id, username, account, role
 from user where account = #1# and password = #2#
+-- [queryUserByAccount]
+SELECT id, username, account, role
+from user where account = #1#
+-- [insertUser]
+insert into user (account, password, username, role) values (#1#, #2#, #3#, #4#)
+-- [queryUserById]
+select id, username, account, role from user where id = #1#
