@@ -4,6 +4,9 @@ import digital.dto.User;
 import org.n3r.eql.Eql;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 @Repository
 public class UserDao {
 
@@ -23,5 +26,19 @@ public class UserDao {
 
     public User getUserById(String id) {
         return new Eql().selectFirst("queryUserById").params(id).returnType(User.class).execute();
+    }
+
+    public List<Map> getUserList(String username, String account) {
+        username = "%" + username + "%";
+        account = "%" + account + "%";
+        return new Eql().select("getUserList").params(username, account).returnType(Map.class).execute();
+    }
+
+    public void setHighRole(String id) {
+        new Eql().update("setHighRole").params(id).execute();
+    }
+
+    public void deleteUser(String id) {
+        new Eql().delete("deleteUser").params(id).execute();
     }
 }

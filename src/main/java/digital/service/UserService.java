@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -56,5 +57,17 @@ public class UserService {
 
     public User getUserInfo(String id) {
         return userDao.getUserById(id);
+    }
+
+    public List<Map> getUserList(String username, String account) {
+        return  userDao.getUserList(username, account);
+    }
+
+    public void setHighRole(String id) {
+        userDao.setHighRole(id);
+    }
+
+    public void deleteUser(String id) {
+        userDao.deleteUser(id);
     }
 }

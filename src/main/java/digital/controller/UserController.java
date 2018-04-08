@@ -48,4 +48,28 @@ public class UserController {
         }
         return result;
     }
+
+    @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
+    public Result getUserList(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(userService.getUserList(map.get("username"), map.get("account")));
+        return result;
+    }
+
+    @RequestMapping(value = "/setHighRole", method = RequestMethod.POST)
+    public Result setHighRole(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        userService.setHighRole(map.get("id"));
+        result.setCode(200);
+        return result;
+    }
+
+    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
+    public Result deleteUser(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        userService.deleteUser(map.get("id"));
+        result.setCode(200);
+        return result;
+    }
 }

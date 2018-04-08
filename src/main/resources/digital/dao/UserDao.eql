@@ -1,10 +1,27 @@
 -- [queryUser]
 SELECT id, username, account, role
 from user where account = #1# and password = #2#
+
 -- [queryUserByAccount]
 SELECT id, username, account, role
 from user where account = #1#
+
 -- [insertUser]
 insert into user (account, password, username, role) values (#1#, #2#, #3#, #4#)
+
 -- [queryUserById]
 select id, username, account, role from user where id = #1#
+
+-- [getUserList]
+select id, username, account, role, (select count(1) from download d where d.user_id = u.id) downloadCount from user u
+where 1 = 1
+-- iff '#1#' != ''
+and u.username like #1#
+-- iff '#2#' != ''
+and u.account like #2#
+
+-- [setHighRole]
+update user set role = '2' where id = #1#
+
+-- [deleteUser]
+delete from user where id = #1#
