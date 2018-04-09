@@ -24,7 +24,7 @@ public class MyWebAppConfigurer
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/");
-        registry.addResourceHandler("/bookImg/**").addResourceLocations("classpath:/bookImg/");
+        registry.addResourceHandler("/image/**").addResourceLocations("classpath:/image/");
         //registry.addResourceHandler("/printScreenFile/**").addResourceLocations("classpath:/printScreenFile/");
 
         super.addResourceHandlers(registry);
