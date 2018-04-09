@@ -62,4 +62,8 @@ public class BookService {
     public void addType(String name, String remark) {
         bookTypeDao.addType(name, remark);
     }
+
+    public void updateType(String id, String name, String remark) {
+        bookTypeDao.updateType(id, name, remark);
+    }
 }

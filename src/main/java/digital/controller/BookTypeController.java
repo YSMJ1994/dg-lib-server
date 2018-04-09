@@ -42,4 +42,11 @@ public class BookTypeController {
         result.setCode(200);
         return result;
     }
+    @RequestMapping(value = "/updateType", method = RequestMethod.POST)
+    public Result updateType(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        bookService.updateType(map.get("id"), map.get("name"), map.get("remark"));
+        result.setCode(200);
+        return result;
+    }
 }

@@ -1,6 +1,5 @@
 package digital.dao;
 
-import digital.dto.BookType;
 import org.n3r.eql.Eql;
 import org.springframework.stereotype.Repository;
 
@@ -22,7 +21,10 @@ public class BookTypeDao {
     }
 
     public void addType(String name, String remark) {
-        BookType bt = new Eql().insert("addType").params(name, remark).returnType(BookType.class).execute();
-        System.out.println(bt != null ? bt.getId() : "xxx");
+        new Eql().insert("addType").params(name, remark).execute();
+    }
+
+    public void updateType(String id, String name, String remark) {
+        new Eql().update("updateType").params(id, name, remark).execute();
     }
 }

@@ -1,6 +1,11 @@
 -- [getAllTypes]
 select *, (select count(1) from book b where b.type = bt.id) bookNum from book_type bt
+
 -- [deleteType]
 delete from book_type where id = #1#
+
 -- [addType]
 insert into book_type (name, remark) values (#1#, #2#)
+
+-- [updateType]
+update book_type set name = #2#,remark = #3# where id = #1#
