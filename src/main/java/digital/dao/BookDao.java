@@ -23,4 +23,8 @@ public class BookDao {
     public List<Book> getBookByTypeLimit3(String type) {
         return new Eql().select("getBookByTypeLimit3").params(type).returnType(Book.class).execute();
     }
+
+    public void changeBookType(String id) {
+        new Eql().update("changeBookType").params(id).execute();
+    }
 }

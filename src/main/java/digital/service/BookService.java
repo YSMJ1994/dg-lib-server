@@ -1,6 +1,7 @@
 package digital.service;
 
 import digital.dao.BookDao;
+import digital.dao.BookTypeDao;
 import digital.dto.Book;
 import digital.dto.BookType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import java.util.Map;
 public class BookService {
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private BookTypeDao bookTypeDao;
 
     public List<Map<String, Object>> getBookStrap() {
         List<Map<String, Object>> res = new ArrayList<>();
@@ -42,7 +45,21 @@ public class BookService {
     public List<Book> getBookByType(String type) {
         return bookDao.getBookByType(type);
     }
+
     public List<Book> getBookByTypeLimit3(String type) {
         return bookDao.getBookByTypeLimit3(type);
+    }
+
+    public List<Map> getAllTypes() {
+        return bookTypeDao.getAllTypes();
+    }
+
+    public void deleteType(String id) {
+        bookTypeDao.deleteType(id);
+        bookDao.changeBookType(id);
+    }
+
+    public void addType(String name, String remark) {
+        bookTypeDao.addType(name, remark);
     }
 }

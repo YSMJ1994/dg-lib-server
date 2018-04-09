@@ -4,3 +4,5 @@ SELECT * from book_type
 SELECT * from book where type = #1#
 -- [getBookByTypeLimit3]
 SELECT * from book where type = #1# order by average_score desc limit 4
+-- [changeBookType]
+update book set type = '1' where type = #1#
