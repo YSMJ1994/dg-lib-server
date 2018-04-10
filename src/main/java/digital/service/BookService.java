@@ -78,4 +78,15 @@ public class BookService {
         return bookDao.getRecommendTop();
     }
 
+    public void deleteBook(String id) {
+        bookDao.deleteBook(id);
+    }
+
+    public void uploadBook(Map<String, String> map) {
+        bookDao.uploadBook(map);
+    }
+
+    public void updateBook(Map<String, String> map) {
+        bookDao.updateBook(map);
+    }
 }

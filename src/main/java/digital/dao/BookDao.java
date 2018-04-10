@@ -44,4 +44,15 @@ public class BookDao {
         return new Eql().select("getRecommendTop").returnType(Map.class).execute();
     }
 
+    public void deleteBook(String id) {
+        new Eql().delete("deleteBook").params(id).execute();
+    }
+
+    public void uploadBook(Map<String, String> map) {
+        new Eql().insert("addBook").params(map).execute();
+    }
+
+    public void updateBook(Map<String, String> map) {
+        new Eql().update("updateBook").params(map).execute();
+    }
 }

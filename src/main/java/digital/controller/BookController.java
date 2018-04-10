@@ -59,4 +59,29 @@ public class BookController {
         result.setData(bookService.getRecommendTop());
         return result;
     }
+
+
+    @RequestMapping(value = "/deleteBook", method = RequestMethod.POST)
+    public Result deleteBook(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        bookService.deleteBook(map.get("id"));
+        result.setCode(200);
+        return result;
+    }
+
+    @RequestMapping(value = "/uploadBook", method = RequestMethod.POST)
+    public Result uploadBook(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        bookService.uploadBook(map);
+        result.setCode(200);
+        return result;
+    }
+
+    @RequestMapping(value = "/updateBook", method = RequestMethod.POST)
+    public Result updateBook(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        bookService.updateBook(map);
+        result.setCode(200);
+        return result;
+    }
 }

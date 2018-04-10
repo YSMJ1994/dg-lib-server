@@ -30,6 +30,8 @@ public class Book {
 
     private String coverUrl;
 
+    private String fileUrl;
+
     private int averageScore;
 
 }

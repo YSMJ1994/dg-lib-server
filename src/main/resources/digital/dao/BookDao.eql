@@ -11,6 +11,22 @@ and b.author like #3#
 -- [getBookByTypeLimit3]
 SELECT * from book where type = #1# order by average_score desc limit 4
 
+-- [deleteBook]
+delete from book where id = #1#
+
+-- [addBook]
+insert into book
+(name, type, byte_size, author, translator, version, language, cover_url, average_score, file_url)
+values
+(#name#, #type#, #byteSize#, #author#, #translator#, #version#, #language#, #coverUrl#, 0, #fileUrl#)
+
+-- [updateBook]
+update book set
+name = #name#,type = #type#,
+author = #author#,translator = #translator#,
+version = #version#,language = #language#
+where id = #id#
+
 -- [changeBookType]
 update book set type = '1' where type = #1#
 
