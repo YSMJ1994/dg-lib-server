@@ -50,6 +50,7 @@ public class BookService {
         return bookDao.getBookByTypeLimit3(type);
     }
 
+
     public List<Map> getAllTypes() {
         return bookTypeDao.getAllTypes();
     }
@@ -66,4 +67,15 @@ public class BookService {
     public void updateType(String id, String name, String remark) {
         bookTypeDao.updateType(id, name, remark);
     }
+
+    public List<Map> getDownloadTopFive() {
+        return bookDao.getDownloadTopFive();
+    }
+    public List<Map> getScoreTopFive() {
+        return bookDao.getScoreTopFive();
+    }
+    public List<Map> getRecommendTop() {
+        return bookDao.getRecommendTop();
+    }
+
 }

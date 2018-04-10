@@ -30,6 +30,6 @@ public class Book {
 
     private String coverUrl;
 
-    private String averageScore;
+    private int averageScore;
 
 }

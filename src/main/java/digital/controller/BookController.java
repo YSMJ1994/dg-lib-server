@@ -36,4 +36,27 @@ public class BookController {
         return result;
     }
 
+    @RequestMapping(value = "/getDownloadTopFive", method = RequestMethod.POST)
+    public Result getDownloadTopFive(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getDownloadTopFive());
+        return result;
+    }
+
+    @RequestMapping(value = "/getScoreTopFive", method = RequestMethod.POST)
+    public Result getScoreTopFive(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getScoreTopFive());
+        return result;
+    }
+
+    @RequestMapping(value = "/getRecommendTop", method = RequestMethod.POST)
+    public Result getRecommendTop(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getRecommendTop());
+        return result;
+    }
 }

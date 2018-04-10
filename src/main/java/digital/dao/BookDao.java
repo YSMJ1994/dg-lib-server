@@ -27,7 +27,21 @@ public class BookDao {
         return new Eql().select("getBookByTypeLimit3").params(type).returnType(Book.class).execute();
     }
 
+
     public void changeBookType(String id) {
         new Eql().update("changeBookType").params(id).execute();
     }
+
+    public List<Map> getDownloadTopFive() {
+        return new Eql().select("getDownloadTopFive").returnType(Map.class).execute();
+    }
+
+    public List<Map> getScoreTopFive() {
+        return new Eql().select("getScoreTopFive").returnType(Map.class).execute();
+    }
+
+    public List<Map> getRecommendTop() {
+        return new Eql().select("getRecommendTop").returnType(Map.class).execute();
+    }
+
 }

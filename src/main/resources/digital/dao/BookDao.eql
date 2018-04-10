@@ -13,3 +13,38 @@ SELECT * from book where type = #1# order by average_score desc limit 4
 
 -- [changeBookType]
 update book set type = '1' where type = #1#
+
+-- [getDownloadTopFive]
+select a.*,(SELECT count(1) FROM download d WHERE d.book_id = a.id) count from book a order by count desc LIMIT 5
+
+
+-- [getScoreTopFive]
+select a.* from book a LEFT JOIN book_type b on a.type = b.id ORDER BY a.average_score desc limit 5
+
+-- [getRecommendTop]
+SELECT
+  *,
+  xishu * tcount score
+FROM (
+       SELECT
+         c.*,
+         if((c.count / max(c.count)) IS NULL, 0, (c.count / max(c.count))) AS xishu
+       FROM (
+              SELECT
+                a.*,
+                (SELECT count(1)
+                 FROM download d
+                 WHERE d.book_id = a.id) count
+              FROM book a
+              ORDER BY count DESC
+            ) c
+       GROUP BY c.id
+     ) d LEFT JOIN (
+                     SELECT
+                       x.type,
+                       count(*) tcount
+                     FROM book x LEFT JOIN download y ON x.id = y.book_id
+                     GROUP BY x.type
+                   ) e ON d.type = e.type order by xishu desc limit 5
+
+
