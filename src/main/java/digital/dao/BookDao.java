@@ -6,6 +6,7 @@ import org.n3r.eql.Eql;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建自: Sober 时间: 2018/4/7.
@@ -17,8 +18,10 @@ public class BookDao {
         return new Eql().select("getAllBookType").returnType(BookType.class).execute();
     }
 
-    public List<Book> getBookByType(String type) {
-        return new Eql().select("getBookByType").params(type).returnType(Book.class).execute();
+    public List<Book> getBookByType(String type, String name, String author) {
+        name = "%" + name + "%";
+        author = "%" + author + "%";
+        return new Eql().select("getBookByType").params(type, name, author).returnType(Map.class).execute();
     }
     public List<Book> getBookByTypeLimit3(String type) {
         return new Eql().select("getBookByTypeLimit3").params(type).returnType(Book.class).execute();

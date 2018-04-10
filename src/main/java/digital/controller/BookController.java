@@ -28,4 +28,12 @@ public class BookController {
         return result;
     }
 
+    @RequestMapping(value = "/getBookByType", method = RequestMethod.POST)
+    public Result getBookByType(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getBookByType(map.get("type"), map.get("name"), map.get("author")));
+        return result;
+    }
+
 }

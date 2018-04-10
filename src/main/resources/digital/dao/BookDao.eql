@@ -1,8 +1,15 @@
 -- [getAllBookType]
 SELECT * from book_type
+
 -- [getBookByType]
-SELECT * from book where type = #1#
+SELECT b.*, bt.name typeName from book b left join book_type bt on bt.id = b.type
+where 1 = 1
+and b.type = #1#
+and b.name like #2#
+and b.author like #3#
+
 -- [getBookByTypeLimit3]
 SELECT * from book where type = #1# order by average_score desc limit 4
+
 -- [changeBookType]
 update book set type = '1' where type = #1#

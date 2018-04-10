@@ -42,8 +42,8 @@ public class BookService {
         return bookDao.getAllBookType();
     }
 
-    public List<Book> getBookByType(String type) {
-        return bookDao.getBookByType(type);
+    public List<Book> getBookByType(String type, String name, String author) {
+        return bookDao.getBookByType(type, name, author);
     }
 
     public List<Book> getBookByTypeLimit3(String type) {
