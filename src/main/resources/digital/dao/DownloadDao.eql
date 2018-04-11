@@ -1,0 +1,14 @@
+-- [getMyDownload]
+select d.*,u.username username, b.name bookName from download d
+left join user u on u.id = d.user_id
+left join book b on b.id = d.book_id
+where d.user_id = #1#
+
+-- [getDownloadByBookId]
+select * from download where book_id = #1#
+
+-- [addDownload]
+insert into download (user_id, book_id, score, total) values (#1#, #2#, 0, 0)
+
+-- [setScore]
+update download set score = #2# where id = #1#

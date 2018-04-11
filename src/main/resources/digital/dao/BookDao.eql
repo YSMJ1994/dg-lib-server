@@ -4,9 +4,14 @@ SELECT * from book_type
 -- [getBookByType]
 SELECT b.*, bt.name typeName from book b left join book_type bt on bt.id = b.type
 where 1 = 1
-and b.type = #1#
-and b.name like #2#
-and b.author like #3#
+-- iff "" != type
+and b.type = #type#
+-- iff "" != name
+and b.name like #name#
+-- iff "" != author
+and b.author like #author#
+-- end
+order by b.average_score desc
 
 -- [getBookByTypeLimit3]
 SELECT * from book where type = #1# order by average_score desc limit 4
@@ -27,12 +32,16 @@ author = #author#,translator = #translator#,
 version = #version#,language = #language#
 where id = #id#
 
+-- [updateBookScore]
+update book set
+average_score = #2#
+where id = #1#
+
 -- [changeBookType]
 update book set type = '1' where type = #1#
 
 -- [getDownloadTopFive]
 select a.*,(SELECT count(1) FROM download d WHERE d.book_id = a.id) count from book a order by count desc LIMIT 5
-
 
 -- [getScoreTopFive]
 select a.* from book a LEFT JOIN book_type b on a.type = b.id ORDER BY a.average_score desc limit 5
@@ -63,4 +72,10 @@ FROM (
                      GROUP BY x.type
                    ) e ON d.type = e.type order by xishu desc limit 5
 
+-- [getBookDetailsById]
+select a.*,b.remark,(select count(*) from download c where c.book_id = a.id) as downloadCount from book a
+LEFT JOIN book_type b on a.type = b.id where a.id = #1#
 
+-- [getTopFiveByType]
+select a.*,b.remark,(select count(*) from download c where c.book_id = a.id) as downloadCount from book a
+LEFT JOIN book_type b on a.type = b.id where a.type = #1# ORDER BY downloadCount desc limit 5

@@ -60,7 +60,6 @@ public class BookController {
         return result;
     }
 
-
     @RequestMapping(value = "/deleteBook", method = RequestMethod.POST)
     public Result deleteBook(@RequestBody Map<String, String> map) {
         Result result = new Result();
@@ -82,6 +81,22 @@ public class BookController {
         Result result = new Result();
         bookService.updateBook(map);
         result.setCode(200);
+        return result;
+    }
+
+    @RequestMapping(value = "/getBookDetailsById", method = RequestMethod.POST)
+    public Result getBookDetailsById(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getBookDetailsById(map.get("id")));
+        return result;
+    }
+
+    @RequestMapping(value = "/getTopFiveByType", method = RequestMethod.POST)
+    public Result getTopFiveByType(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(bookService.getTopFiveByType(map.get("type")));
         return result;
     }
 }

@@ -22,6 +22,10 @@ public class BookService {
     @Autowired
     private BookTypeDao bookTypeDao;
 
+    public void updateBookScore(int bookId, int score) {
+        bookDao.updateBookScore(bookId, score);
+    }
+
     public List<Map<String, Object>> getBookStrap() {
         List<Map<String, Object>> res = new ArrayList<>();
         List<BookType> allBookType = getAllBookType();
@@ -71,9 +75,11 @@ public class BookService {
     public List<Map> getDownloadTopFive() {
         return bookDao.getDownloadTopFive();
     }
+
     public List<Map> getScoreTopFive() {
         return bookDao.getScoreTopFive();
     }
+
     public List<Map> getRecommendTop() {
         return bookDao.getRecommendTop();
     }
@@ -88,5 +94,13 @@ public class BookService {
 
     public void updateBook(Map<String, String> map) {
         bookDao.updateBook(map);
+    }
+
+    public List<Map> getBookDetailsById(String id) {
+        return bookDao.getBookDetailsById(id);
+    }
+
+    public List<Map> getTopFiveByType(String type) {
+        return bookDao.getTopFiveByType(type);
     }
 }
