@@ -12,3 +12,6 @@ insert into download (user_id, book_id, score, total) values (#1#, #2#, 0, 0)
 
 -- [setScore]
 update download set score = #2# where id = #1#
+
+-- [deleteByBookId]
+delete from download where book_id = #1#

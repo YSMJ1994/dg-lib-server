@@ -61,4 +61,8 @@ public class DownloadService {
         averageScore = total / downloads.size();
         bookService.updateBookScore(bookId, averageScore);
     }
+
+    public void deleteByBookId(String id) {
+        downloadDao.deleteByBookId(id);
+    }
 }

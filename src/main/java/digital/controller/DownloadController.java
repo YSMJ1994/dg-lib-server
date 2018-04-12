@@ -34,4 +34,12 @@ public class DownloadController {
         result.setData(downloadService.setScore(map.get("id"), map.get("score"), map.get("bookId")));
         return result;
     }
+
+    @RequestMapping(value = "/addDownload", method = RequestMethod.POST)
+    public Result addDownload(@RequestBody Map<String, String> map) {
+        Result result = new Result();
+        result.setCode(200);
+        result.setData(downloadService.addDownload(map.get("userId"), map.get("bookId")));
+        return result;
+    }
 }

@@ -20,6 +20,8 @@ public class BookController {
     @Autowired
     private BookService bookService;
 
+
+
     @RequestMapping(value = "/getBookStrap", method = RequestMethod.POST)
     public Result getBookStrap(@RequestBody Map<String, String> map) {
         Result result = new Result();

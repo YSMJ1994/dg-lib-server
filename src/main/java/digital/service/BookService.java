@@ -21,6 +21,8 @@ public class BookService {
     private BookDao bookDao;
     @Autowired
     private BookTypeDao bookTypeDao;
+    @Autowired
+    private DownloadService downloadService;
 
     public void updateBookScore(int bookId, int score) {
         bookDao.updateBookScore(bookId, score);
@@ -86,9 +88,13 @@ public class BookService {
 
     public void deleteBook(String id) {
         bookDao.deleteBook(id);
+        downloadService.deleteByBookId(id);
     }
 
     public void uploadBook(Map<String, String> map) {
+        if (map.get("type") == null || "".equals(map.get("type").trim())) {
+            map.put("type", "1");
+        }
         bookDao.uploadBook(map);
     }
 

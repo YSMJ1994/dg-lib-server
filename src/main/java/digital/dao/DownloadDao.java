@@ -27,4 +27,17 @@ public class DownloadDao {
     public List<Download> getDownloadByBookId(int bookId) {
         return new Eql().select("getDownloadByBookId").params(bookId).returnType(Download.class).execute();
     }
+
+    public void deleteByBookId(String id) {
+        int iId = 0;
+        if(id != null && !"".equals(id.trim())) {
+            try {
+                iId = Integer.parseInt(id);
+            }catch (NumberFormatException e) {
+                e.printStackTrace();
+                return;
+            }
+        }
+        new Eql().delete("deleteByBookId").params(iId).execute();
+    }
 }

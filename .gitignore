@@ -1,4 +1,6 @@
 *.log
 *.iml
 .idea
+src/main/resources/static
+src/main/resources/*.html
 target
