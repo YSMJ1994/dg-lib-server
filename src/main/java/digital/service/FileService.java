@@ -61,7 +61,7 @@ public class FileService {
      * @param fileName
      * @return
      */
-    public Object downloadFile(String fileName, String oldName) {
+    public Object downloadFile(String fileName, String oldName, String review) {
         try {
             if(fileName == null) {
                 return "-1";
@@ -69,7 +69,7 @@ public class FileService {
             //String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
             //jarPath = jarPath.substring(jarPath.indexOf("file:") + 5);
             //String path = jarPath + "uploadFolder/" + fileName;
-            String path = uploadPath + "/" + fileName;;
+            String path = uploadPath + "/" + fileName;
             //File file = new File(path);
             //String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toUpperCase();
             InputStream in = new BufferedInputStream(new FileInputStream(path));
@@ -82,9 +82,14 @@ public class FileService {
             //}else {
             //    resName = fileName;
             //}
-            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes()));
+            response.addHeader("Content-Disposition", "inline;filename=" + new String(fileName.getBytes()));
             response.addHeader("Content-Length", "" + bytes.length);
-            response.setContentType("application/octet-stream");
+            if(review != null && !"".equals(review)) {
+                //response.setContentType("multipart/form-data");
+                response.setContentType("application/pdf");
+            }else {
+                response.setContentType("application/octet-stream");
+            }
             ServletOutputStream out = response.getOutputStream();
             out.write(bytes);
             out.flush();
@@ -94,5 +99,37 @@ public class FileService {
             return "-1";
         }
         return "1";
+    }
+
+    public Object testDownload() {
+        try {
+            //String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
+            //jarPath = jarPath.substring(jarPath.indexOf("file:") + 5);
+            //String path = jarPath + "uploadFolder/" + fileName;
+            String path = uploadPath + "/C7F231AF4310000143771C2012101BF8.pdf";
+            //File file = new File(path);
+            //String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toUpperCase();
+            InputStream in = new BufferedInputStream(new FileInputStream(path));
+            byte[] bytes = new byte[in.available()];
+            in.read(bytes);
+            in.close();
+            //String resName;
+            //if(oldName != null && !"".equals(oldName.trim()) && !"null".equals(oldName)) {
+            //    resName = oldName;
+            //}else {
+            //    resName = fileName;
+            //}
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String("test".getBytes()));
+            response.addHeader("Content-Length", "" + bytes.length);
+            response.setContentType("multipart/form-data");
+            ServletOutputStream out = response.getOutputStream();
+            out.write(bytes);
+            out.flush();
+            out.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+            return "-1";
+        }
+        return "-1";
     }
 }

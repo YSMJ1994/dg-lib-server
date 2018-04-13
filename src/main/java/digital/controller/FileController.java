@@ -48,6 +48,15 @@ public class FileController {
     @RequestMapping(value = "/download",method={RequestMethod.GET, RequestMethod.POST})
     @ResponseBody
     public Object downLoadVideo(HttpServletRequest request){
-        return fileService.downloadFile(request.getParameter("fileName"), request.getParameter("oldName"));
+        return fileService.downloadFile(request.getParameter("fileName"), request.getParameter("oldName"), request.getParameter("review"));
+    }
+
+    /**
+     * 下载
+     */
+    @RequestMapping(value = "/testDownload",method={RequestMethod.GET, RequestMethod.POST})
+    @ResponseBody
+    public Object testDownload(HttpServletRequest request){
+        return fileService.testDownload();
     }
 }
