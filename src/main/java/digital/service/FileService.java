@@ -1,7 +1,6 @@
 package digital.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +18,6 @@ public class FileService {
     @Autowired
     HttpServletResponse response;
 
-    @Value("${upload-file-path}")
-    String uploadPath;
-
     /**
      * 上传文件
      * @param file
@@ -36,11 +32,11 @@ public class FileService {
                 //jarPath = jarPath.substring(jarPath.indexOf("file:") + 5);
                 System.out.println("uploadFileName--------------------" + fileName);
                 //targetFilePath = jarPath + "uploadFolder/" + fileName;
-                File dir = new File(uploadPath);
+                File dir = new File(FOLDER_PATH);
                 if(!dir.exists()) {
                     dir.mkdir();
                 }
-                targetFilePath = uploadPath + "/" + fileName;
+                targetFilePath = FOLDER_PATH + "/" + fileName;
                 new File(targetFilePath).delete();
                 BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(targetFilePath)));
                 out.write(file.getBytes());
@@ -69,7 +65,7 @@ public class FileService {
             //String jarPath = getClass().getProtectionDomain().getCodeSource().getLocation().toString();
             //jarPath = jarPath.substring(jarPath.indexOf("file:") + 5);
             //String path = jarPath + "uploadFolder/" + fileName;
-            String path = uploadPath + "/" + fileName;;
+            String path = FOLDER_PATH + "/" + fileName;;
             //File file = new File(path);
             //String suffix = fileName.substring(fileName.lastIndexOf(".") + 1).toUpperCase();
             InputStream in = new BufferedInputStream(new FileInputStream(path));
