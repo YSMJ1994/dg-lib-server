@@ -39,8 +39,8 @@ public class UserService {
         String account = map.get("account");
         String password = map.get("password");
         String username = map.get("username");
-        //默认权限为游客
-        String role = "3";
+        //默认权限为会员
+        String role = "2";
         boolean b = accountIsAvailable(account);
         if(b) {
             userDao.registerUser(account, password, username, role);
