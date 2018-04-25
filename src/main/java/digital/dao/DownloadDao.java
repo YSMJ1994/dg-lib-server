@@ -40,4 +40,8 @@ public class DownloadDao {
         }
         new Eql().delete("deleteByBookId").params(iId).execute();
     }
+
+    public int getCountByUserId(int userId) {
+        return new Eql().selectFirst("getCountByUserId").params(userId).returnType(Integer.class).execute();
+    }
 }

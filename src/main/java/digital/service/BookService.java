@@ -2,6 +2,7 @@ package digital.service;
 
 import digital.dao.BookDao;
 import digital.dao.BookTypeDao;
+import digital.dao.DownloadDao;
 import digital.dto.Book;
 import digital.dto.BookType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class BookService {
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private DownloadDao downloadDao;
     @Autowired
     private BookTypeDao bookTypeDao;
     @Autowired
@@ -82,8 +85,14 @@ public class BookService {
         return bookDao.getScoreTopFive();
     }
 
-    public List<Map> getRecommendTop() {
-        return bookDao.getRecommendTop();
+    public List<Map> getRecommendTop(String userId) {
+        if(null == userId || "".equals(userId.trim())) {
+            userId = "1";
+        }
+        int downloadCount = downloadDao.getCountByUserId(Integer.parseInt(userId));
+        int highScore = bookDao.getHeightScoreBook();
+        int highDownload = bookDao.getHeightDownloadCount();
+        return bookDao.getRecommendTop(downloadCount, highScore, highDownload, Integer.parseInt(userId));
     }
 
     public void deleteBook(String id) {

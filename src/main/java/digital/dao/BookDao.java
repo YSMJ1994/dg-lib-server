@@ -49,8 +49,8 @@ public class BookDao {
         return new Eql().select("getScoreTopFive").returnType(Map.class).execute();
     }
 
-    public List<Map> getRecommendTop() {
-        return new Eql().select("getRecommendTop").returnType(Map.class).execute();
+    public List<Map> getRecommendTop(int downloadCount, int highScore, int highDownload, int userId) {
+        return new Eql().select("getRecommendTop").params(downloadCount, highScore, highDownload, userId).returnType(Map.class).execute();
     }
 
     public void deleteBook(String id) {
@@ -75,5 +75,13 @@ public class BookDao {
 
     public List<Map> getTopFiveByType(String type) {
         return new Eql().select("getTopFiveByType").params(type).returnType(Map.class).execute();
+    }
+
+    public int getHeightScoreBook() {
+        return new Eql().selectFirst("getHeightScoreBook").returnType(Integer.class).execute();
+    }
+
+    public int getHeightDownloadCount() {
+        return new Eql().selectFirst("getHeightDownloadCount").returnType(Integer.class).execute();
     }
 }

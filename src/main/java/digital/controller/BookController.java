@@ -58,7 +58,7 @@ public class BookController {
     public Result getRecommendTop(@RequestBody Map<String, String> map) {
         Result result = new Result();
         result.setCode(200);
-        result.setData(bookService.getRecommendTop());
+        result.setData(bookService.getRecommendTop(map.get("userId")));
         return result;
     }
 

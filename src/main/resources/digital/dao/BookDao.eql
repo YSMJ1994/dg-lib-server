@@ -46,31 +46,43 @@ select a.*,(SELECT count(1) FROM download d WHERE d.book_id = a.id) count from b
 -- [getScoreTopFive]
 select a.* from book a LEFT JOIN book_type b on a.type = b.id ORDER BY a.average_score desc limit 5
 
+-- [getHeightScoreBook]
+select average_score score from book order by average_score desc limit 1
+
+-- [getHeightDownloadCount]
+select count(1) c from book b left join download d on d.book_id = b.id group by b.id order by c desc limit 1
+
+
+
 -- [getRecommendTop]
-SELECT
-  *,
-  xishu * tcount score
-FROM (
-       SELECT
-         c.*,
-         if((c.count / max(c.count)) IS NULL, 0, (c.count / max(c.count))) AS xishu
-       FROM (
-              SELECT
-                a.*,
-                (SELECT count(1)
-                 FROM download d
-                 WHERE d.book_id = a.id) count
-              FROM book a
-              ORDER BY count DESC
-            ) c
-       GROUP BY c.id
-     ) d LEFT JOIN (
-                     SELECT
-                       x.type,
-                       count(*) tcount
-                     FROM book x LEFT JOIN download y ON x.id = y.book_id
-                     GROUP BY x.type
-                   ) e ON d.type = e.type order by xishu desc limit 5
+select
+  ((
+   (case
+        when td = 0 then 1
+        when td is null then 1
+        else td
+        end )
+   / #1#) * (
+    (case
+        when score = 0 then 1
+        when score is null then 1
+        else score
+        end )
+    / #2#) * (
+     (case
+         when bd = 0 then 1
+         when bd is null then 1
+         else bd
+         end )
+     / #3#)) xxx, bb.*
+from (select b.*, b.type bt, b.average_score score, count(1) bd from book b left join download d on d.book_id = b.id group by b.id) bb
+left join (
+            select b.type, count(1) td from download d
+              left join book b on b.id = d.book_id
+            where d.user_id = #4#
+            group by type
+          ) aa on aa.type = bb.bt
+order by xxx desc limit 5
 
 -- [getBookDetailsById]
 select a.*,b.remark,(select count(*) from download c where c.book_id = a.id) as downloadCount from book a
